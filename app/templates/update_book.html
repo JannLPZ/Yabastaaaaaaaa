@@ -1,0 +1,45 @@
+{% extends 'basse.html' %}
+
+{% block content %}
+<h1>Actualizar Libro</h1>
+    <input type="hidden" name="csrf-token" id= "csrf-token" value="{{ csrf_token() }}">
+
+    <input type="hidden" name="isbn" id= "isbn" value="{{ libro[0] }}">
+
+    <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" value="{{ libro[1]}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="autor_id" class="form-label">Autor</label>
+        <input type="text" class="form-control" id="autor_id" name="autor_id" value="{{ libro[2] }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="anoedicion" class="form-label">Fecha Edicion</label>
+        <input type="number" class="form-control" id="anoedicion" name="anoedicion" value="{{ libro[3] }}" step="0.01" required>
+    </div>
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion"> {{ libro[5] }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="precio" class="form-label">Precio</label>
+        <input type="number" class="form-control" id="precio" name="precio" value="{{ libro[4] }}" step="0.01" required>
+    </div>
+    <div class="mb-3">
+        <label for="imagen" class="form-label">Portada (Imagen)</label>
+        <input type="file" class="form-control" id="imagen" name="imagen">
+        {% if libro[6] %}
+        <br>
+        <img src="{{ url_for('static', filename='/img/portadas/' + libro[6]) }}" alt="Portada" width="100">
+        {% endif %} 
+    </div>
+    <button type="button" class="btn btn-primary editar2">Actualizar Libro</button>
+
+{% block customJS %}
+<script src="{{ url_for('static', filename='lib/sweetalert2-9.10.0/sweetalert2.all.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/notificacionSwal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/sweetipdate.js') }}"></script>
+{% endblock %}
+
+{% endblock %}
